@@ -6,7 +6,7 @@
     <title>Data Table</title>
     <style>
         body {
-            font-family: 'Trebuchet MS', sans-serif;
+            font-family: 'Arial', sans-serif;
             margin: 20px;
             background-color: #252525;
         }
@@ -110,361 +110,369 @@
             }
         }
     </style>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
 </head>
 <body>
-    <div style="display: flex; align-items: center; gap: 20px;">
-        <div>
-            <h1 style="text-align: left; font-size: 3em; margin-bottom: 0;color: rgb(255, 208, 0);">Lossless Scaling</h1>
-            <h2 style="text-align: left; font-size: 1.5em; margin-top: 0; margin-bottom: 20px;color: rgb(0, 153, 255)">Secondary GPU Chart</h2>
-        </div>
-        <img src="https://cdn2.steamgriddb.com/icon/b59afec3c8a23ac3fe9ad100261fa291.png" alt="GPU Chart Logo" style="height: 100px; width: auto;">
+    <div style="position: absolute; top: 20px; left: 20px;">
+        <a href="https://starrycat2015.github.io/losslessdb/" style="text-decoration: none; color: rgb(77, 77, 77); font-size: 24px;">
+            <i class="fas fa-home" style="background-color: #252525; padding: 10px; border-radius: 50%;"></i>
+        </a>
     </div>
-    <div class="form-group">
-        <input type="text" id="searchInput" placeholder="Search for GPU...">
-    </div>
-    <div class="form-group-container">
-        <div class="form-group">
-            <label for="nameFilter" class="filter-label">Filter by Brand:</label>
-            <select id="nameFilter" class="filter-select" onchange="filterColumn(0)">
-                <option value="">All</option>
-                <option value="AMD">AMD</option>
-                <option value="Nvidia">Nvidia</option>
-                <option value="Intel">Intel</option>
-            </select>
+    <div style="margin-top: 80px;"> <!-- Add this container -->
+        <div style="display: flex; align-items: center; gap: 20px;">
+            <div>
+                <h1 style="text-align: left; font-size: 3em; margin-bottom: 0;color: rgb(255, 208, 0);">Lossless Scaling</h1>
+                <h2 style="text-align: left; font-size: 1.5em; margin-top: 0; margin-bottom: 20px;color: rgb(0, 153, 255)">Secondary GPU Chart</h2>
+            </div>
+            <img src="https://cdn2.steamgriddb.com/icon/b59afec3c8a23ac3fe9ad100261fa291.png" alt="GPU Chart Logo" style="height: 100px; width: auto;">
         </div>
         <div class="form-group">
-            <label for="countryFilter" class="filter-label">Filter by PCIe:</label>
-            <select id="countryFilter" class="filter-select" onchange="filterColumn(3)">
-                <option value="">All</option>
-                <option value="PCIe 3.0 x8">PCIe 3.0 x8</option>
-                <option value="PCIe 4.0 x8">PCIE 4.0 x8</option>
-                <option value="PCIe 3.0 x16">PCIe 3.0 x16</option>
-                <option value="PCIe 4.0 x16">PCIe 4.0 x16</option>
-            </select>
+            <input type="text" id="searchInput" placeholder="Search for GPU...">
         </div>
-    </div>
-    <div class="table-container">
-        <table id="dataTable">
-            <colgroup>
-                <col style="width: 5%;"> <!-- Brand -->
-            </colgroup>
-            <thead>
-                <tr>
-                    <th onclick="sortTable(0)">Brand</th>
-                    <th onclick="sortTable(1)">GPU</th>
-                    <th onclick="sortTable(2)">Performance</th>
-                    <th onclick="sortTable(3)">PCIe</th>
-                    <th onclick="sortTable(4)">Notes</th>
-                    <th onclick="sortTable(5)">Contributor</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td style="background-color: #ef0707; text-align: center; color: white; font-weight: bold;">AMD</td>
-                    <td style="color: white;">RX 9070XT</td>
-                    <td style="line-height: 2; color: white;">1080p = N/A<br>1440p = N/A<br>4k = N/A</td>
-                    <td style="color: white;"></td>
-                    <td style="color: white;"></td>
-                    <td style="color: white;"></td>
-                </tr>
-                <tr>
-                    <td style="background-color: #ef0707; text-align: center; color: white; font-weight: bold;">AMD</td>
-                    <td style="color: white;">RX 5500XT</td>
-                    <td style="line-height: 2; color: white;">1080p = 300<br>1440p = 200<br>4k = 120</td>
-                    <td style="color: white;"></td>
-                    <td style="color: white;"></td>
-                    <td style="color: white;"></td>
-                </tr>
-                <tr>
-                    <td style="background-color: #ef0707; text-align: center; color: white; font-weight: bold;">AMD</td>
-                    <td style="color: white;">RX 5600XT</td>
-                    <td style="line-height: 2; color: white;">1080p = 330<br>1440p = 220<br>4k = 130</td>
-                    <td style="color: white;"></td>
-                    <td style="color: white;"></td>
-                    <td style="color: white;"></td>
-                </tr>
-                <tr>
-                    <td style="background-color: #ef0707; text-align: center; color: white; font-weight: bold;">AMD</td>
-                    <td style="color: white;">RX 5700XT</td>
-                    <td style="line-height: 2; color: white;">1080p = 480<br>1440p = 300<br>4k = 170</td>
-                    <td style="color: white;"></td>
-                    <td style="color: white;"></td>
-                    <td style="color: white;"></td>
-                </tr>
-                <tr>
-                    <td style="background-color: #ef0707; text-align: center; color: white; font-weight: bold;">AMD</td>
-                    <td style="color: white;">RX 6400</td>
-                    <td style="line-height: 2; color: white;">1080p = 270<br>1440p = 200<br>4k = 120</td>
-                    <td style="color: white;"></td>
-                    <td style="color: white;"></td>
-                    <td style="color: white;"></td>
-                </tr>
-                <tr>
-                    <td style="background-color: #ef0707; text-align: center; color: white; font-weight: bold;">AMD</td>
-                    <td style="color: white;">RX 6500XT</td>
-                    <td style="line-height: 2; color: white;">1080p = 300<br>1440p = 210<br>4k = 130</td>
-                    <td style="color: white;"></td>
-                    <td style="color: white;"></td>
-                    <td style="color: white;"></td>
-                </tr>
-                <tr>
-                    <td style="background-color: #ef0707; text-align: center; color: white; font-weight: bold;">AMD</td>
-                    <td style="color: white;">RX 6600m</td>
-                    <td style="line-height: 2; color: white;">1080p = 330<br>1440p = 220<br>4k = 140</td>
-                    <td style="color: white;"></td>
-                    <td style="color: white;"></td>
-                    <td style="color: white;"></td>
-                </tr>
-                <tr>
-                    <td style="background-color: #ef0707; text-align: center; color: white; font-weight: bold;">AMD</td>
-                    <td style="color: white;">RX 6600</td>
-                    <td style="line-height: 2; color: white;">1080p = 460<br>1440p = 260<br>4k = 150</td>
-                    <td style="color: white;"></td>
-                    <td style="color: white;"></td>
-                    <td style="color: white;"></td>
-                </tr>
-                <tr>
-                    <td style="background-color: #ef0707; text-align: center; color: white; font-weight: bold;">AMD</td>
-                    <td style="color: white;">RX 6600XT</td>
-                    <td style="line-height: 2; color: white;">1080p = 500<br>1440p = 330<br>4k = 180</td>
-                    <td style="color: white;"></td>
-                    <td style="color: white;"></td>
-                    <td style="color: white;"></td>
-                </tr>
-                <tr>
-                    <td style="background-color: #ef0707; text-align: center; color: white; font-weight: bold;">AMD</td>
-                    <td style="color: white;">RX 6650XT</td>
-                    <td style="line-height: 2; color: white;">1080p = N/A<br>1440p = N/A<br>4k = 175</td>
-                    <td style="color: white;"></td>
-                    <td style="color: white;"></td>
-                    <td style="color: white;"></td>
-                </tr>
-                <tr>
-                    <td style="background-color: #ef0707; text-align: center; color: white; font-weight: bold;">AMD</td>
-                    <td style="color: white;">RX 6700</td>
-                    <td style="line-height: 2; color: white;">1080p = 530<br>1440p = 350<br>4k = 202</td>
-                    <td style="color: white;"></td>
-                    <td style="color: white;"></td>
-                    <td style="color: white;"></td>
-                </tr>
-                <tr>
-                    <td style="background-color: #ef0707; text-align: center; color: white; font-weight: bold;">AMD</td>
-                    <td style="color: white;">RX 6800</td>
-                    <td style="line-height: 2; color: white;">1080p = 570<br>1440p = 380<br>4k = 240</td>
-                    <td style="color: white;"></td>
-                    <td style="color: white;"></td>
-                    <td style="color: white;"></td>
-                </tr>
-                <tr>
-                    <td style="background-color: #ef0707; text-align: center; color: white; font-weight: bold;">AMD</td>
-                    <td style="color: white;">RX 7800XT</td>
-                    <td style="line-height: 2; color: white;">1080p = N/A<br>1440p = N/A<br>4k = 320</td>
-                    <td style="color: white;"></td>
-                    <td style="color: white;"></td>
-                    <td style="color: white;"></td>
-                </tr>
-                <tr>
-                    <td style="background-color: #ef0707; text-align: center; color: white; font-weight: bold;">AMD</td>
-                    <td style="color: white;">RX 7700XT</td>
-                    <td style="line-height: 2; color: white;">1080p = N/A<br>1440p = N/A<br>4k = 287</td>
-                    <td style="color: white;"></td>
-                    <td style="color: white;"></td>
-                    <td style="color: white;"></td>
-                </tr>
-                <tr>
-                    <td style="background-color: #ef0707; text-align: center; color: white; font-weight: bold;">AMD</td>
-                    <td style="color: white;">RX 7600</td>
-                    <td style="line-height: 2; color: white;">1080p = N/A<br>1440p = 370<br>4k = 220</td>
-                    <td style="color: white;"></td>
-                    <td style="color: white;"></td>
-                    <td style="color: white;"></td>
-                </tr>
-                <tr>
-                    <td style="background-color: #ef0707; text-align: center; color: white; font-weight: bold;">AMD</td>
-                    <td style="color: white;">780M (60W)</td>
-                    <td style="line-height: 2; color: white;">1080p = 340<br>1440p = 210<br>4k = 110</td>
-                    <td style="color: white;"></td>
-                    <td style="color: white;"></td>
-                    <td style="color: white;"></td>
-                </tr>
-                <tr>
-                    <td style="background-color: #ef0707; text-align: center; color: white; font-weight: bold;">AMD</td>
-                    <td style="color: white;">Vega 64</td>
-                    <td style="line-height: 2; color: white;">1080p = 400<br>1440p = 300<br>4k = 165</td>
-                    <td style="color: white;"></td>
-                    <td style="color: white;"></td>
-                    <td style="color: white;"></td>
-                </tr>
-                <tr>
-                    <td style="background-color: #ef0707; text-align: center; color: white; font-weight: bold;">AMD</td>
-                    <td style="color: white;">Vega 7 (r5 5600h)</td>
-                    <td style="line-height: 2; color: white;">1080p = 168<br>1440p = 98<br>4k = 45</td>
-                    <td style="color: white;"></td>
-                    <td style="color: white;"></td>
-                    <td style="color: white;"></td>
-                </tr>
-                <tr>
-                    <td style="background-color: #ef0707; text-align: center; color: white; font-weight: bold;">AMD</td>
-                    <td style="color: white;">Vega 8</td>
-                    <td style="line-height: 2; color: white;">1080p = 208<br>1440p = 115<br>4k = 50</td>
-                    <td style="color: white;"></td>
-                    <td style="color: white;"></td>
-                    <td style="color: white;"></td>
-                </tr>
-                <tr>
-                    <td style="background-color: #ef0707; text-align: center; color: white; font-weight: bold;">AMD</td>
-                    <td style="color: white;">RX 580</td>
-                    <td style="line-height: 2; color: white;">1080p = 200<br>1440p = 130<br>4k = 50</td>
-                    <td style="color: white;"></td>
-                    <td style="color: white;"></td>
-                    <td style="color: white;"></td>
-                </tr>
-                <tr>
-                    <td style="background-color: #ef0707; text-align: center; color: white; font-weight: bold;">AMD</td>
-                    <td style="color: white;">RX 550 4GB</td>
-                    <td style="line-height: 2; color: white;">1080p = 110<br>1440p = 62<br>4k = N/A</td>
-                    <td style="color: white;"></td>
-                    <td style="color: white;"></td>
-                    <td style="color: white;"></td>
-                </tr>
-                <tr>
-                    <td style="background-color: #76b900; text-align: center; color: white; font-weight: bold;">Nvidia</td>
-                    <td style="color: white;">GTX 970</td>
-                    <td style="line-height: 2; color: white;">1080p = 230<br>1440p = 137<br>4k = 56</td>
-                    <td style="color: white;"></td>
-                    <td style="color: white;"></td>
-                    <td style="color: white;"></td>
-                </tr>
-                <tr>
-                    <td style="background-color: #76b900; text-align: center; color: white; font-weight: bold;">Nvidia</td>
-                    <td style="color: white;">GTX 1050TI</td>
-                    <td style="line-height: 2; color: white;">1080p = 160<br>1440p = 100<br>4k = 50</td>
-                    <td style="color: white;"></td>
-                    <td style="color: white;"></td>
-                    <td style="color: white;"></td>
-                </tr>
-                <tr>
-                    <td style="background-color: #76b900; text-align: center; color: white; font-weight: bold;">Nvidia</td>
-                    <td style="color: white;">GTX 1070</td>
-                    <td style="line-height: 2; color: white;">1080p = 280<br>1440p = 185<br>4k = 80</td>
-                    <td style="color: white;"></td>
-                    <td style="color: white;"></td>
-                    <td style="color: white;"></td>
-                </tr>
-                <tr>
-                    <td style="background-color: #76b900; text-align: center; color: white; font-weight: bold;">Nvidia</td>
-                    <td style="color: white;">GTX 1080TI</td>
-                    <td style="line-height: 2; color: white;">1080p = 350<br>1440p = 250<br>4k = 130</td>
-                    <td style="color: white;"></td>
-                    <td style="color: white;"></td>
-                    <td style="color: white;"></td>
-                </tr>
-                <tr>
-                    <td style="background-color: #76b900; text-align: center; color: white; font-weight: bold;">Nvidia</td>
-                    <td style="color: white;">GTX 1660S</td>
-                    <td style="line-height: 2; color: white;">1080p = 300<br>1440p = 190<br>4k = 67</td>
-                    <td style="color: white;"></td>
-                    <td style="color: white;"></td>
-                    <td style="color: white;"></td>
-                </tr>
-                <tr>
-                    <td style="background-color: #76b900; text-align: center; color: white; font-weight: bold;">Nvidia</td>
-                    <td style="color: white;">RTX 2060S</td>
-                    <td style="line-height: 2; color: white;">1080p = 350<br>1440p = 220<br>4k = 85</td>
-                    <td style="color: white;"></td>
-                    <td style="color: white;"></td>
-                    <td style="color: white;"></td>
-                </tr>
-                <tr>
-                    <td style="background-color: #76b900; text-align: center; color: white; font-weight: bold;">Nvidia</td>
-                    <td style="color: white;">RTX 3060 12GB</td>
-                    <td style="line-height: 2; color: white;">1080p = 210<br>1440p = 190<br>4k = 65</td>
-                    <td style="color: white;"></td>
-                    <td style="color: white;"></td>
-                    <td style="color: white;"></td>
-                </tr>
-                <tr>
-                    <td style="background-color: #76b900; text-align: center; color: white; font-weight: bold;">Nvidia</td>
-                    <td style="color: white;">RTX 3050 6GB</td>
-                    <td style="line-height: 2; color: white;">1080p = 190<br>1440p = 160<br>4k = 60</td>
-                    <td style="color: white;"></td>
-                    <td style="color: white;"></td>
-                    <td style="color: white;"></td>
-                </tr>
-                <tr>
-                    <td style="background-color: #76b900; text-align: center; color: white; font-weight: bold;">Nvidia</td>
-                    <td style="color: white;">RTX 4060</td>
-                    <td style="line-height: 2; color: white;">1080p = 480<br>1440p = 390<br>4k = 175</td>
-                    <td style="color: white;"></td>
-                    <td style="color: white;"></td>
-                    <td style="color: white;"></td>
-                </tr>
-                <tr>
-                    <td style="background-color: #76b900; text-align: center; color: white; font-weight: bold;">Nvidia</td>
-                    <td style="color: white;">RTX 4060TI</td>
-                    <td style="line-height: 2; color: white;">1080p = 500<br>1440p = 430<br>4k = 197</td>
-                    <td style="color: white;"></td>
-                    <td style="color: white;"></td>
-                    <td style="color: white;"></td>
-                </tr>
-                <tr>
-                    <td style="background-color: rgb(0, 166, 255); text-align: center; color: white; font-weight: bold;">Intel</td>
-                    <td style="color: white;">Arc B580</td>
-                    <td style="line-height: 2; color: white;">1080p = 440<br>1440p = 330<br>4k = 175</td>
-                    <td style="color: white;"></td>
-                    <td style="color: white;"></td>
-                    <td style="color: white;"></td>
-                </tr>
-                <tr>
-                    <td style="background-color: rgb(0, 166, 255); text-align: center; color: white; font-weight: bold;">Intel</td>
-                    <td style="color: white;">Arc B570</td>
-                    <td style="line-height: 2; color: white;">1080p = 410<br>1440p = 300<br>4k = 160</td>
-                    <td style="color: white;"></td>
-                    <td style="color: white;"></td>
-                    <td style="color: white;"></td>
-                </tr>
-                <tr>
-                    <td style="background-color: rgb(0, 166, 255); text-align: center; color: white; font-weight: bold;">Intel</td>
-                    <td style="color: white;">Arc A750</td>
-                    <td style="line-height: 2; color: white;">1080p = 460<br>1440p = 340<br>4k = 180</td>
-                    <td style="color: white;"></td>
-                    <td style="color: white;"></td>
-                    <td style="color: white;"></td>
-                </tr>
-                <tr>
-                    <td style="background-color: rgb(0, 166, 255); text-align: center; color: white; font-weight: bold;">Intel</td>
-                    <td style="color: white;">UHD 770 (Desktop)</td>
-                    <td style="line-height: 2; color: white;">1080p = 108<br>1440p = 65<br>4k = n/a</td>
-                    <td style="color: white;"></td>
-                    <td style="color: white;"></td>
-                    <td style="color: white;"></td>
-                </tr>
-                <tr>
-                    <td style="background-color: rgb(0, 166, 255); text-align: center; color: white; font-weight: bold;">Intel</td>
-                    <td style="color: white;">UHD 730 (Desktop)</td>
-                    <td style="line-height: 2; color: white;">1080p = 80<br>1440p = 58<br>4k = n/a</td>
-                    <td style="color: white;"></td>
-                    <td style="color: white;"></td>
-                    <td style="color: white;"></td>
-                </tr>
-                <tr>
-                    <td style="background-color: rgb(0, 166, 255); text-align: center; color: white; font-weight: bold;">Intel</td>
-                    <td style="color: white;">UHD 750 (Laptop)</td>
-                    <td style="line-height: 2; color: white;">1080p = 100<br>1440p = 50<br>4k = n/a</td>
-                    <td style="color: white;"></td>
-                    <td style="color: white;"></td>
-                    <td style="color: white;"></td>
-                </tr>
-                <tr>
-                    <td style="background-color: rgb(0, 166, 255); text-align: center; color: white; font-weight: bold;">Intel</td>
-                    <td style="color: white;">UHD 730 (Laptop)</td>
-                    <td style="line-height: 2; color: white;">1080p = 55<br>1440p = n/a<br>4k = n/a</td>
-                    <td style="color: white;"></td>
-                    <td style="color: white;"></td>
-                    <td style="color: white;"></td>
-                </tr>
-            </tbody>
-        </table>
+        <div class="form-group-container">
+            <div class="form-group">
+                <label for="nameFilter" class="filter-label">Filter by Brand:</label>
+                <select id="nameFilter" class="filter-select" onchange="filterColumn(0)">
+                    <option value="">All</option>
+                    <option value="AMD">AMD</option>
+                    <option value="Nvidia">Nvidia</option>
+                    <option value="Intel">Intel</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="countryFilter" class="filter-label">Filter by PCIe:</label>
+                <select id="countryFilter" class="filter-select" onchange="filterColumn(3)">
+                    <option value="">All</option>
+                    <option value="PCIe 3.0 x8">PCIe 3.0 x8</option>
+                    <option value="PCIe 4.0 x8">PCIE 4.0 x8</option>
+                    <option value="PCIe 3.0 x16">PCIe 3.0 x16</option>
+                    <option value="PCIe 4.0 x16">PCIe 4.0 x16</option>
+                </select>
+            </div>
+        </div>
+        <div class="table-container">
+            <table id="dataTable">
+                <colgroup>
+                    <col style="width: 5%;"> <!-- Brand -->
+                </colgroup>
+                <thead>
+                    <tr>
+                        <th>Brand</th> 
+                        <th>GPU</th> 
+                        <th onclick="sortTable(2)">Performance</th> 
+                        <th onclick="sortTable(3)">PCIe</th> 
+                        <th>Notes</th> 
+                        <th>Contributor</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="background-color: #ef0707; text-align: center; color: white; font-weight: bold;">AMD</td>
+                        <td style="color: white;">RX 9070XT</td>
+                        <td style="line-height: 2; color: white;">1080p = N/A<br>1440p = N/A<br>4k = N/A</td>
+                        <td style="color: white;"></td>
+                        <td style="color: white;"></td>
+                        <td style="color: white;"></td>
+                    </tr>
+                    <tr>
+                        <td style="background-color: #ef0707; text-align: center; color: white; font-weight: bold;">AMD</td>
+                        <td style="color: white;">RX 5500XT</td>
+                        <td style="line-height: 2; color: white;">1080p = 300<br>1440p = 200<br>4k = 120</td>
+                        <td style="color: white;"></td>
+                        <td style="color: white;"></td>
+                        <td style="color: white;"></td>
+                    </tr>
+                    <tr>
+                        <td style="background-color: #ef0707; text-align: center; color: white; font-weight: bold;">AMD</td>
+                        <td style="color: white;">RX 5600XT</td>
+                        <td style="line-height: 2; color: white;">1080p = 330<br>1440p = 220<br>4k = 130</td>
+                        <td style="color: white;"></td>
+                        <td style="color: white;"></td>
+                        <td style="color: white;"></td>
+                    </tr>
+                    <tr>
+                        <td style="background-color: #ef0707; text-align: center; color: white; font-weight: bold;">AMD</td>
+                        <td style="color: white;">RX 5700XT</td>
+                        <td style="line-height: 2; color: white;">1080p = 480<br>1440p = 300<br>4k = 170</td>
+                        <td style="color: white;"></td>
+                        <td style="color: white;"></td>
+                        <td style="color: white;"></td>
+                    </tr>
+                    <tr>
+                        <td style="background-color: #ef0707; text-align: center; color: white; font-weight: bold;">AMD</td>
+                        <td style="color: white;">RX 6400</td>
+                        <td style="line-height: 2; color: white;">1080p = 270<br>1440p = 200<br>4k = 120</td>
+                        <td style="color: white;"></td>
+                        <td style="color: white;"></td>
+                        <td style="color: white;"></td>
+                    </tr>
+                    <tr>
+                        <td style="background-color: #ef0707; text-align: center; color: white; font-weight: bold;">AMD</td>
+                        <td style="color: white;">RX 6500XT</td>
+                        <td style="line-height: 2; color: white;">1080p = 300<br>1440p = 210<br>4k = 130</td>
+                        <td style="color: white;"></td>
+                        <td style="color: white;"></td>
+                        <td style="color: white;"></td>
+                    </tr>
+                    <tr>
+                        <td style="background-color: #ef0707; text-align: center; color: white; font-weight: bold;">AMD</td>
+                        <td style="color: white;">RX 6600m</td>
+                        <td style="line-height: 2; color: white;">1080p = 330<br>1440p = 220<br>4k = 140</td>
+                        <td style="color: white;"></td>
+                        <td style="color: white;"></td>
+                        <td style="color: white;"></td>
+                    </tr>
+                    <tr>
+                        <td style="background-color: #ef0707; text-align: center; color: white; font-weight: bold;">AMD</td>
+                        <td style="color: white;">RX 6600</td>
+                        <td style="line-height: 2; color: white;">1080p = 460<br>1440p = 260<br>4k = 150</td>
+                        <td style="color: white;"></td>
+                        <td style="color: white;"></td>
+                        <td style="color: white;"></td>
+                    </tr>
+                    <tr>
+                        <td style="background-color: #ef0707; text-align: center; color: white; font-weight: bold;">AMD</td>
+                        <td style="color: white;">RX 6600XT</td>
+                        <td style="line-height: 2; color: white;">1080p = 500<br>1440p = 330<br>4k = 180</td>
+                        <td style="color: white;"></td>
+                        <td style="color: white;"></td>
+                        <td style="color: white;"></td>
+                    </tr>
+                    <tr>
+                        <td style="background-color: #ef0707; text-align: center; color: white; font-weight: bold;">AMD</td>
+                        <td style="color: white;">RX 6650XT</td>
+                        <td style="line-height: 2; color: white;">1080p = N/A<br>1440p = N/A<br>4k = 175</td>
+                        <td style="color: white;"></td>
+                        <td style="color: white;"></td>
+                        <td style="color: white;"></td>
+                    </tr>
+                    <tr>
+                        <td style="background-color: #ef0707; text-align: center; color: white; font-weight: bold;">AMD</td>
+                        <td style="color: white;">RX 6700</td>
+                        <td style="line-height: 2; color: white;">1080p = 530<br>1440p = 350<br>4k = 202</td>
+                        <td style="color: white;"></td>
+                        <td style="color: white;"></td>
+                        <td style="color: white;"></td>
+                    </tr>
+                    <tr>
+                        <td style="background-color: #ef0707; text-align: center; color: white; font-weight: bold;">AMD</td>
+                        <td style="color: white;">RX 6800</td>
+                        <td style="line-height: 2; color: white;">1080p = 570<br>1440p = 380<br>4k = 240</td>
+                        <td style="color: white;"></td>
+                        <td style="color: white;"></td>
+                        <td style="color: white;"></td>
+                    </tr>
+                    <tr>
+                        <td style="background-color: #ef0707; text-align: center; color: white; font-weight: bold;">AMD</td>
+                        <td style="color: white;">RX 7800XT</td>
+                        <td style="line-height: 2; color: white;">1080p = N/A<br>1440p = N/A<br>4k = 320</td>
+                        <td style="color: white;"></td>
+                        <td style="color: white;"></td>
+                        <td style="color: white;"></td>
+                    </tr>
+                    <tr>
+                        <td style="background-color: #ef0707; text-align: center; color: white; font-weight: bold;">AMD</td>
+                        <td style="color: white;">RX 7700XT</td>
+                        <td style="line-height: 2; color: white;">1080p = N/A<br>1440p = N/A<br>4k = 287</td>
+                        <td style="color: white;"></td>
+                        <td style="color: white;"></td>
+                        <td style="color: white;"></td>
+                    </tr>
+                    <tr>
+                        <td style="background-color: #ef0707; text-align: center; color: white; font-weight: bold;">AMD</td>
+                        <td style="color: white;">RX 7600</td>
+                        <td style="line-height: 2; color: white;">1080p = N/A<br>1440p = 370<br>4k = 220</td>
+                        <td style="color: white;"></td>
+                        <td style="color: white;"></td>
+                        <td style="color: white;"></td>
+                    </tr>
+                    <tr>
+                        <td style="background-color: #ef0707; text-align: center; color: white; font-weight: bold;">AMD</td>
+                        <td style="color: white;">780M (60W)</td>
+                        <td style="line-height: 2; color: white;">1080p = 340<br>1440p = 210<br>4k = 110</td>
+                        <td style="color: white;"></td>
+                        <td style="color: white;"></td>
+                        <td style="color: white;"></td>
+                    </tr>
+                    <tr>
+                        <td style="background-color: #ef0707; text-align: center; color: white; font-weight: bold;">AMD</td>
+                        <td style="color: white;">Vega 64</td>
+                        <td style="line-height: 2; color: white;">1080p = 400<br>1440p = 300<br>4k = 165</td>
+                        <td style="color: white;"></td>
+                        <td style="color: white;"></td>
+                        <td style="color: white;"></td>
+                    </tr>
+                    <tr>
+                        <td style="background-color: #ef0707; text-align: center; color: white; font-weight: bold;">AMD</td>
+                        <td style="color: white;">Vega 7 (r5 5600h)</td>
+                        <td style="line-height: 2; color: white;">1080p = 168<br>1440p = 98<br>4k = 45</td>
+                        <td style="color: white;"></td>
+                        <td style="color: white;"></td>
+                        <td style="color: white;"></td>
+                    </tr>
+                    <tr>
+                        <td style="background-color: #ef0707; text-align: center; color: white; font-weight: bold;">AMD</td>
+                        <td style="color: white;">Vega 8</td>
+                        <td style="line-height: 2; color: white;">1080p = 208<br>1440p = 115<br>4k = 50</td>
+                        <td style="color: white;"></td>
+                        <td style="color: white;"></td>
+                        <td style="color: white;"></td>
+                    </tr>
+                    <tr>
+                        <td style="background-color: #ef0707; text-align: center; color: white; font-weight: bold;">AMD</td>
+                        <td style="color: white;">RX 580</td>
+                        <td style="line-height: 2; color: white;">1080p = 200<br>1440p = 130<br>4k = 50</td>
+                        <td style="color: white;"></td>
+                        <td style="color: white;"></td>
+                        <td style="color: white;"></td>
+                    </tr>
+                    <tr>
+                        <td style="background-color: #ef0707; text-align: center; color: white; font-weight: bold;">AMD</td>
+                        <td style="color: white;">RX 550 4GB</td>
+                        <td style="line-height: 2; color: white;">1080p = 110<br>1440p = 62<br>4k = N/A</td>
+                        <td style="color: white;"></td>
+                        <td style="color: white;"></td>
+                        <td style="color: white;"></td>
+                    </tr>
+                    <tr>
+                        <td style="background-color: #76b900; text-align: center; color: white; font-weight: bold;">Nvidia</td>
+                        <td style="color: white;">GTX 970</td>
+                        <td style="line-height: 2; color: white;">1080p = 230<br>1440p = 137<br>4k = 56</td>
+                        <td style="color: white;"></td>
+                        <td style="color: white;"></td>
+                        <td style="color: white;"></td>
+                    </tr>
+                    <tr>
+                        <td style="background-color: #76b900; text-align: center; color: white; font-weight: bold;">Nvidia</td>
+                        <td style="color: white;">GTX 1050TI</td>
+                        <td style="line-height: 2; color: white;">1080p = 160<br>1440p = 100<br>4k = 50</td>
+                        <td style="color: white;"></td>
+                        <td style="color: white;"></td>
+                        <td style="color: white;"></td>
+                    </tr>
+                    <tr>
+                        <td style="background-color: #76b900; text-align: center; color: white; font-weight: bold;">Nvidia</td>
+                        <td style="color: white;">GTX 1070</td>
+                        <td style="line-height: 2; color: white;">1080p = 280<br>1440p = 185<br>4k = 80</td>
+                        <td style="color: white;"></td>
+                        <td style="color: white;"></td>
+                        <td style="color: white;"></td>
+                    </tr>
+                    <tr>
+                        <td style="background-color: #76b900; text-align: center; color: white; font-weight: bold;">Nvidia</td>
+                        <td style="color: white;">GTX 1080TI</td>
+                        <td style="line-height: 2; color: white;">1080p = 350<br>1440p = 250<br>4k = 130</td>
+                        <td style="color: white;"></td>
+                        <td style="color: white;"></td>
+                        <td style="color: white;"></td>
+                    </tr>
+                    <tr>
+                        <td style="background-color: #76b900; text-align: center; color: white; font-weight: bold;">Nvidia</td>
+                        <td style="color: white;">GTX 1660S</td>
+                        <td style="line-height: 2; color: white;">1080p = 300<br>1440p = 190<br>4k = 67</td>
+                        <td style="color: white;"></td>
+                        <td style="color: white;"></td>
+                        <td style="color: white;"></td>
+                    </tr>
+                    <tr>
+                        <td style="background-color: #76b900; text-align: center; color: white; font-weight: bold;">Nvidia</td>
+                        <td style="color: white;">RTX 2060S</td>
+                        <td style="line-height: 2; color: white;">1080p = 350<br>1440p = 220<br>4k = 85</td>
+                        <td style="color: white;"></td>
+                        <td style="color: white;"></td>
+                        <td style="color: white;"></td>
+                    </tr>
+                    <tr>
+                        <td style="background-color: #76b900; text-align: center; color: white; font-weight: bold;">Nvidia</td>
+                        <td style="color: white;">RTX 3060 12GB</td>
+                        <td style="line-height: 2; color: white;">1080p = 210<br>1440p = 190<br>4k = 65</td>
+                        <td style="color: white;"></td>
+                        <td style="color: white;"></td>
+                        <td style="color: white;"></td>
+                    </tr>
+                    <tr>
+                        <td style="background-color: #76b900; text-align: center; color: white; font-weight: bold;">Nvidia</td>
+                        <td style="color: white;">RTX 3050 6GB</td>
+                        <td style="line-height: 2; color: white;">1080p = 190<br>1440p = 160<br>4k = 60</td>
+                        <td style="color: white;"></td>
+                        <td style="color: white;"></td>
+                        <td style="color: white;"></td>
+                    </tr>
+                    <tr>
+                        <td style="background-color: #76b900; text-align: center; color: white; font-weight: bold;">Nvidia</td>
+                        <td style="color: white;">RTX 4060</td>
+                        <td style="line-height: 2; color: white;">1080p = 480<br>1440p = 390<br>4k = 175</td>
+                        <td style="color: white;"></td>
+                        <td style="color: white;"></td>
+                        <td style="color: white;"></td>
+                    </tr>
+                    <tr>
+                        <td style="background-color: #76b900; text-align: center; color: white; font-weight: bold;">Nvidia</td>
+                        <td style="color: white;">RTX 4060TI</td>
+                        <td style="line-height: 2; color: white;">1080p = 500<br>1440p = 430<br>4k = 197</td>
+                        <td style="color: white;"></td>
+                        <td style="color: white;"></td>
+                        <td style="color: white;"></td>
+                    </tr>
+                    <tr>
+                        <td style="background-color: rgb(0, 166, 255); text-align: center; color: white; font-weight: bold;">Intel</td>
+                        <td style="color: white;">Arc B580</td>
+                        <td style="line-height: 2; color: white;">1080p = 440<br>1440p = 330<br>4k = 175</td>
+                        <td style="color: white;"></td>
+                        <td style="color: white;"></td>
+                        <td style="color: white;"></td>
+                    </tr>
+                    <tr>
+                        <td style="background-color: rgb(0, 166, 255); text-align: center; color: white; font-weight: bold;">Intel</td>
+                        <td style="color: white;">Arc B570</td>
+                        <td style="line-height: 2; color: white;">1080p = 410<br>1440p = 300<br>4k = 160</td>
+                        <td style="color: white;"></td>
+                        <td style="color: white;"></td>
+                        <td style="color: white;"></td>
+                    </tr>
+                    <tr>
+                        <td style="background-color: rgb(0, 166, 255); text-align: center; color: white; font-weight: bold;">Intel</td>
+                        <td style="color: white;">Arc A750</td>
+                        <td style="line-height: 2; color: white;">1080p = 460<br>1440p = 340<br>4k = 180</td>
+                        <td style="color: white;"></td>
+                        <td style="color: white;"></td>
+                        <td style="color: white;"></td>
+                    </tr>
+                    <tr>
+                        <td style="background-color: rgb(0, 166, 255); text-align: center; color: white; font-weight: bold;">Intel</td>
+                        <td style="color: white;">UHD 770 (Desktop)</td>
+                        <td style="line-height: 2; color: white;">1080p = 108<br>1440p = 65<br>4k = n/a</td>
+                        <td style="color: white;"></td>
+                        <td style="color: white;"></td>
+                        <td style="color: white;"></td>
+                    </tr>
+                    <tr>
+                        <td style="background-color: rgb(0, 166, 255); text-align: center; color: white; font-weight: bold;">Intel</td>
+                        <td style="color: white;">UHD 730 (Desktop)</td>
+                        <td style="line-height: 2; color: white;">1080p = 80<br>1440p = 58<br>4k = n/a</td>
+                        <td style="color: white;"></td>
+                        <td style="color: white;"></td>
+                        <td style="color: white;"></td>
+                    </tr>
+                    <tr>
+                        <td style="background-color: rgb(0, 166, 255); text-align: center; color: white; font-weight: bold;">Intel</td>
+                        <td style="color: white;">UHD 750 (Laptop)</td>
+                        <td style="line-height: 2; color: white;">1080p = 100<br>1440p = 50<br>4k = n/a</td>
+                        <td style="color: white;"></td>
+                        <td style="color: white;"></td>
+                        <td style="color: white;"></td>
+                    </tr>
+                    <tr>
+                        <td style="background-color: rgb(0, 166, 255); text-align: center; color: white; font-weight: bold;">Intel</td>
+                        <td style="color: white;">UHD 730 (Laptop)</td>
+                        <td style="line-height: 2; color: white;">1080p = 55<br>1440p = n/a<br>4k = n/a</td>
+                        <td style="color: white;"></td>
+                        <td style="color: white;"></td>
+                        <td style="color: white;"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
     <script>
         // Search function
@@ -484,33 +492,27 @@
         // Sort function
         function sortTable(n) {
             var table = document.getElementById('dataTable');
-            var rows = Array.from(table.rows).slice(1); // Exclude the header row
-            var isAsc = table.querySelectorAll('th')[n].classList.toggle('asc'); // Toggle sort direction
-
-            rows.sort(function(rowA, rowB) {
-                var cellA = rowA.cells[n].innerText || rowA.cells[n].textContent;
-                var cellB = rowB.cells[n].innerText || rowB.cells[n].textContent;
-
-                // Extract numeric values if the column contains performance data
-                if (n === 2) { // Assuming column 2 is the "Performance" column
-                    cellA = parseInt(cellA.match(/\d+/) || [0]); // Extract the first number or default to 0
-                    cellB = parseInt(cellB.match(/\d+/) || [0]);
-                } else {
-                    // For other columns, compare as strings
-                    cellA = cellA.toUpperCase();
-                    cellB = cellB.toUpperCase();
-                }
-
-                // Sort numerically or alphabetically based on the column
-                if (!isNaN(cellA) && !isNaN(cellB)) {
-                    return isAsc ? cellA - cellB : cellB - cellA;
-                } else {
-                    return isAsc ? cellA.localeCompare(cellB) : cellB.localeCompare(cellA);
+            var rows = Array.from(table.rows).slice(1);
+            var th = table.querySelectorAll('th');
+            var isAsc = th[n].classList.toggle('asc');
+            th.forEach((header, index) => {
+                if (index !== n) {
+                    header.classList.remove('asc', 'desc');
+                    header.innerHTML = header.innerHTML.replace(/ ▲| ▼/g, '');
                 }
             });
 
-            // Append sorted rows back to the table
+            rows.sort(function(rowA, rowB) {
+                var cellA = rowA.cells[n].innerText.replace(/[^0-9]/g, '') || '0';
+                var cellB = rowB.cells[n].innerText.replace(/[^0-9]/g, '') || '0';
+                return isAsc ? cellA - cellB : cellB - cellA;
+            });
+
             rows.forEach(row => table.appendChild(row));
+
+            // Update the header with the triangle symbol
+            th[n].innerHTML = th[n].innerHTML.replace(/ ▲| ▼/g, '') + (isAsc ? ' ▲' : ' ▼');
+            th[n].classList.toggle('desc', !isAsc);
         }
 
         // Filter function
