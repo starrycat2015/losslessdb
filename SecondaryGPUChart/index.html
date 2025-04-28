@@ -484,13 +484,32 @@
         // Sort function
         function sortTable(n) {
             var table = document.getElementById('dataTable');
-            var rows = Array.from(table.rows).slice(1);
-            var isAsc = table.querySelectorAll('th')[n].classList.toggle('asc');
+            var rows = Array.from(table.rows).slice(1); // Exclude the header row
+            var isAsc = table.querySelectorAll('th')[n].classList.toggle('asc'); // Toggle sort direction
+
             rows.sort(function(rowA, rowB) {
-            var cellA = rowA.cells[n].innerText.replace(/[^0-9]/g, '') || '0';
-            var cellB = rowB.cells[n].innerText.replace(/[^0-9]/g, '') || '0';
-            return isAsc ? cellA - cellB : cellB - cellA;
+                var cellA = rowA.cells[n].innerText || rowA.cells[n].textContent;
+                var cellB = rowB.cells[n].innerText || rowB.cells[n].textContent;
+
+                // Extract numeric values if the column contains performance data
+                if (n === 2) { // Assuming column 2 is the "Performance" column
+                    cellA = parseInt(cellA.match(/\d+/) || [0]); // Extract the first number or default to 0
+                    cellB = parseInt(cellB.match(/\d+/) || [0]);
+                } else {
+                    // For other columns, compare as strings
+                    cellA = cellA.toUpperCase();
+                    cellB = cellB.toUpperCase();
+                }
+
+                // Sort numerically or alphabetically based on the column
+                if (!isNaN(cellA) && !isNaN(cellB)) {
+                    return isAsc ? cellA - cellB : cellB - cellA;
+                } else {
+                    return isAsc ? cellA.localeCompare(cellB) : cellB.localeCompare(cellA);
+                }
             });
+
+            // Append sorted rows back to the table
             rows.forEach(row => table.appendChild(row));
         }
 
